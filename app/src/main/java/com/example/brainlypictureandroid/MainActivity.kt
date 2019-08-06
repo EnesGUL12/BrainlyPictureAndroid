@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_main.*
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 import java.io.UnsupportedEncodingException
 
 var flag_start = false
+var flag_page_settings = false
 
 
 
@@ -28,9 +31,20 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
     fun connect() {
         val text_payload = textPayload
         val text_topic = textTopic
+
+        val butt_settings = buttSettings
+        val page_settings = pageSettings
+        val text_connect = textConnect
+
+        val butt_one_color = buttOneColor
+        val page_one_color = pageOneColor
+        val seek_red = seekRed
+        val seek_green = seekGreen
+        val seek_blue = seekBlue
 
 
         val clientId = MqttClient.generateClientId()
@@ -56,18 +70,36 @@ class MainActivity : AppCompatActivity() {
                     // We are connected
                     Log.d("file", "onSuccess")
 
-                    subscribe(client, "water/info/day1")
+                    subscribe(client, "picture/connect")
 
+                    //publish(client, "update", "water/info")
 
                     if(!flag_start){
-                        publish(client, "info", "picture/info")
-                    }
-                    else if(flag_start){
-                        //butt_upd.setOnClickListener(View.OnClickListener {
-                        //  publish(client, "update", "water/info")
-                        //})
+                        publish(client, "info", "picture/connect")
+                        page_settings.visibility = View.GONE
+                        page_one_color.visibility = View.GONE
+                        flag_start = true
                     }
 
+
+                    butt_settings.setOnClickListener(View.OnClickListener {
+                        if(!page_settings.isVisible) {
+                            page_settings.visibility = View.VISIBLE
+                        }
+                        else{
+                            page_settings.visibility = View.GONE
+                        }
+                    })
+
+
+                    butt_one_color.setOnClickListener(View.OnClickListener {
+                        if(!page_one_color.isVisible) {
+                            page_one_color.visibility = View.VISIBLE
+                        }
+                        else{
+                            page_one_color.visibility = View.GONE
+                        }
+                    })
 
 
 
@@ -82,8 +114,15 @@ class MainActivity : AppCompatActivity() {
                             Log.d("file", message.toString())
 
 
-                            if(topic == "water/info/time") {
-                             //   text_time.text = message.toString()
+                            if(topic == "picture/connect") {
+                                if(message.toString() == "connected"){
+                                    text_connect.setBackgroundColor(Color.GREEN)
+                                    text_connect.text = "Connected"
+                                }
+                                else{
+                                    text_connect.setBackgroundColor(Color.RED)
+                                    text_connect.text = "Disconnected"
+                                }
                             }
 
 
@@ -147,5 +186,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
 }

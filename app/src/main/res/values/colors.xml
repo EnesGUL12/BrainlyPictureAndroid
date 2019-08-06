@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#2196F3</color>
+    <color name="colorBack">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorText">#FFFFFF</color>
 
     // SETTINGS PAGE
-    <color name="colorButtSettBack">#6D6D6D</color>
-    <color name="colorButtSettText">#64B5F6</color>
+    <color name="colorSettBack">#6D6D6D</color>
+    <color name="colorSettButtText">#64B5F6</color>
+    <color name="colorSettConnText">#000307</color>
+    <color name="colorSettConnON">#4CAF50</color>
+    <color name="colorSettConnOFF">#E53935</color>
+
+    // ONE COLOR PAGE
+    <color name="colorOneColorBack">#FFEB3B</color>
+    <color name="colorOneColorText">#3F51B5</color>
+
 </resources>

@@ -5,10 +5,11 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorBack"
         tools:context=".MainActivity">
 
     <TextView
-            android:layout_width="76dp"
+            android:layout_width="139dp"
             android:layout_height="19dp"
             android:text=""
             app:layout_constraintRight_toRightOf="parent"
@@ -19,8 +20,8 @@
             android:layout_marginStart="8dp"/>
     <TextView
             android:text=""
-            android:layout_width="76dp"
-            android:layout_height="wrap_content"
+            android:layout_width="124dp"
+            android:layout_height="19dp"
             android:id="@+id/textPayload"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
@@ -49,34 +50,123 @@
 
 
 
-    // Страница настроек
+    // SETTINGS PAGE
     <LinearLayout
-            android:background="@color/colorButtSettBack"
+            android:background="@color/colorSettBack"
             android:orientation="vertical"
-            android:layout_width="394dp"
-            android:layout_height="118dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="393dp"
+            android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.0"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.0" android:id="@+id/linearLayout">
         <Button
-                android:background="@color/colorButtSettBack"
+                android:background="@color/colorSettBack"
                 android:text="SETTINGS"
+                android:textStyle="bold"
                 android:textSize="30sp"
-                android:textColor="@color/colorButtSettText"
+                android:textColor="@color/colorSettButtText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/button"/>
+                android:layout_height="wrap_content" android:id="@+id/buttSettings"/>
         <LinearLayout
+                android:id="@+id/pageSettings"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="65dp">
+            <TextView
+                    android:text="Disconnected"
+                    android:background="@color/colorSettConnOFF"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorSettConnText"
+                    android:layout_marginLeft="120dp"
+                    android:layout_width="158dp"
+                    android:layout_height="38dp" android:id="@+id/textConnect"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    // ONE COLOR PAGE
+    <LinearLayout
+            android:background="@color/colorOneColorBack"
+            android:orientation="vertical"
+            android:layout_width="391dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.013">
+        <Button
+                android:text="ONE COLOR"
+                android:textStyle="bold"
+                android:textColor="@color/colorOneColorText"
+                android:textSize="30sp"
+                android:background="@color/colorOneColorBack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/buttOneColor"/>
+        <LinearLayout
+                android:id="@+id/pageOneColor"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            <Button
-                    android:text="Button"
+            // RED
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="68dp" android:id="@+id/button2"/>
+                    android:layout_height="match_parent">
+                <TextView
+                        android:text="RED"
+                        android:textSize="15sp"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content" android:id="@+id/textView9"/>
+                <SeekBar
+                        android:max= "255"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/seekRed"/>
+            </LinearLayout>
+
+            // GREEN
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <TextView
+                        android:text="GREEN"
+                        android:textSize="15sp"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content" android:id="@+id/textView10"/>
+                <SeekBar
+                        android:max= "255"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/seekBlue"/>
+            </LinearLayout>
+
+            // BLUE
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <TextView
+                        android:text="BLUE"
+                        android:textSize="15sp"
+                        android:textColor="@android:color/holo_blue_bright"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content" android:id="@+id/textView11"/>
+                <SeekBar
+                        android:max= "255"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/seekGreen"/>
+            </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
