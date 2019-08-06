@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.SeekBar
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_main.*
 import org.eclipse.paho.android.service.MqttAndroidClient
@@ -71,6 +72,9 @@ class MainActivity : AppCompatActivity() {
                     Log.d("file", "onSuccess")
 
                     subscribe(client, "picture/connect")
+                    subscribe(client, "picture/red")
+
+
 
                     //publish(client, "update", "water/info")
 
@@ -98,6 +102,19 @@ class MainActivity : AppCompatActivity() {
                         }
                         else{
                             page_one_color.visibility = View.GONE
+                        }
+                    })
+
+
+                    seek_red.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/red")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
                         }
                     })
 
