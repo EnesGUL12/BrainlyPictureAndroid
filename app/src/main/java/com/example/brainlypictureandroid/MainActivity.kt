@@ -5,16 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.SeekBar
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_main.*
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 import java.io.UnsupportedEncodingException
+import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 
-var flag_start = false
-var flag_page_settings = false
+
+var flag_start: Boolean = false
 
 
 
@@ -40,12 +40,13 @@ class MainActivity : AppCompatActivity() {
         val butt_settings = buttSettings
         val page_settings = pageSettings
         val text_connect = textConnect
+        val seek_brightness = seekBrightness
 
         val butt_one_color = buttOneColor
         val page_one_color = pageOneColor
         val seek_red = seekRed
-        val seek_green = seekGreen
-        val seek_blue = seekBlue
+        val seek_blue = seekGreen
+        val seek_green = seekBlue
 
 
         val clientId = MqttClient.generateClientId()
@@ -72,7 +73,10 @@ class MainActivity : AppCompatActivity() {
                     Log.d("file", "onSuccess")
 
                     subscribe(client, "picture/connect")
+                    subscribe(client, "picture/effect")
                     subscribe(client, "picture/red")
+                    subscribe(client, "picture/green")
+                    subscribe(client, "picture/blue")
 
 
 
@@ -86,6 +90,8 @@ class MainActivity : AppCompatActivity() {
                     }
 
 
+
+                    // SETTINGS PAGE
                     butt_settings.setOnClickListener(View.OnClickListener {
                         if(!page_settings.isVisible) {
                             page_settings.visibility = View.VISIBLE
@@ -95,16 +101,29 @@ class MainActivity : AppCompatActivity() {
                         }
                     })
 
+                    seek_brightness.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/brightness")
+                        }
 
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
+                    // ONE COLOR PAGE
                     butt_one_color.setOnClickListener(View.OnClickListener {
                         if(!page_one_color.isVisible) {
                             page_one_color.visibility = View.VISIBLE
+                            publish(client, "1", "picture/effect")
                         }
                         else{
                             page_one_color.visibility = View.GONE
                         }
                     })
-
 
                     seek_red.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -117,6 +136,43 @@ class MainActivity : AppCompatActivity() {
                         override fun onStopTrackingTouch(seekBar: SeekBar?) {
                         }
                     })
+
+                    seek_green.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/green")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+                    seek_blue.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/blue")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
+                    colorPicker.setColorListener(ColorEnvelopeListener { envelope, _ ->
+                        linearLayout.setBackgroundColor(envelope.color)
+                        var colors = envelope.argb
+                        seek_red.progress = colors[1]
+                        seek_green.progress = colors[2]
+                        seek_blue.progress = colors[3]
+                    })
+
+
+
+
 
 
 

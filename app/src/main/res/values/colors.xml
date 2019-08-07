@@ -12,6 +12,7 @@
     <color name="colorSettConnText">#000307</color>
     <color name="colorSettConnON">#4CAF50</color>
     <color name="colorSettConnOFF">#E53935</color>
+    <color name="colorSettText">#FFFFFF</color>
 
     // ONE COLOR PAGE
     <color name="colorOneColorBack">#FFEB3B</color>
