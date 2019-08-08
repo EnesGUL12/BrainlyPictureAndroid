@@ -19,7 +19,26 @@ import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 
 
 var flag_start: Boolean = false
-var effects_image = arrayOf(R.drawable.icon_search, R.drawable.icon_rainbow)
+var effects_image = arrayOf(
+    R.drawable.icon_search,
+    R.drawable.icon_rainbow,
+    R.drawable.icon_ball,
+    R.drawable.icon_ball,
+    R.drawable.icon_search,
+    R.drawable.icon_search,
+    R.drawable.icon_search,
+    R.drawable.icon_search,
+    R.drawable.icon_search,
+    R.drawable.icon_search,
+    R.drawable.icon_search,
+    R.drawable.icon_search,
+    R.drawable.icon_search,
+    R.drawable.icon_search,
+    R.drawable.icon_search,
+    R.drawable.icon_search,
+    R.drawable.icon_search,
+    R.drawable.icon_search
+    )
 
 
 
