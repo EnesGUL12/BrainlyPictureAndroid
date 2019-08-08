@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import android.widget.SeekBar
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_main.*
@@ -14,7 +15,12 @@ import java.io.UnsupportedEncodingException
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 
 
+
+
+
 var flag_start: Boolean = false
+var effects_image = arrayOf(R.drawable.icon_search, R.drawable.icon_rainbow)
+
 
 
 
@@ -34,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun connect() {
+        val scroll_main = scrollMain
         val text_payload = textPayload
         val text_topic = textTopic
 
@@ -47,6 +54,12 @@ class MainActivity : AppCompatActivity() {
         val seek_red = seekRed
         val seek_blue = seekGreen
         val seek_green = seekBlue
+
+        val page_effects = pageEffects
+        val butt_effects = buttEffects
+        val spinner_effects = spinnerEffects
+        val image_effects = imageEffects
+        val seek_speed =seekSpeed
 
 
         val clientId = MqttClient.generateClientId()
@@ -86,6 +99,7 @@ class MainActivity : AppCompatActivity() {
                         publish(client, "info", "picture/connect")
                         page_settings.visibility = View.GONE
                         page_one_color.visibility = View.GONE
+                        page_effects.visibility = View.GONE
                         flag_start = true
                     }
 
@@ -95,6 +109,7 @@ class MainActivity : AppCompatActivity() {
                     butt_settings.setOnClickListener(View.OnClickListener {
                         if(!page_settings.isVisible) {
                             page_settings.visibility = View.VISIBLE
+                            publish(client, "info", "picture/connect")
                         }
                         else{
                             page_settings.visibility = View.GONE
@@ -118,7 +133,7 @@ class MainActivity : AppCompatActivity() {
                     butt_one_color.setOnClickListener(View.OnClickListener {
                         if(!page_one_color.isVisible) {
                             page_one_color.visibility = View.VISIBLE
-                            publish(client, "1", "picture/effect")
+                            publish(client, "30", "picture/effect")
                         }
                         else{
                             page_one_color.visibility = View.GONE
@@ -169,6 +184,48 @@ class MainActivity : AppCompatActivity() {
                         seek_green.progress = colors[2]
                         seek_blue.progress = colors[3]
                     })
+
+
+
+                    // EFFECTS PAGE
+                    butt_effects.setOnClickListener(View.OnClickListener {
+                        if(!page_effects.isVisible) {
+                            page_effects.visibility = View.VISIBLE
+                        }
+                        else{
+                            page_effects.visibility = View.GONE
+                        }
+                    })
+
+
+                    spinner_effects.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>,
+                            itemSelected: View, selectedItemPosition: Int, selectedId: Long) {
+
+                            publish(client, selectedItemPosition.toString(), "picture/effect")
+
+                            image_effects.setImageResource(effects_image[selectedItemPosition]);
+                            }
+                        override fun onNothingSelected(arg0: AdapterView<*>) {
+
+                        }
+                    })
+
+
+                    seek_speed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/effect/speed")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
 
 
 

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BrainlyPictureAndroid</string>
+
+    <string-array name="spinner_effects">
+        <item> </item>
+        <item>Rainbow Fade</item>
+    </string-array>
 </resources>
