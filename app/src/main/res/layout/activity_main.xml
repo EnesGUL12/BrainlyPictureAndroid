@@ -64,7 +64,7 @@
                         <SeekBar
                                 android:layout_marginTop="5dp"
                                 android:progress="100"
-                                android:max="255"
+                                android:max="200"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/seekBrightness"/>
                     </LinearLayout>
@@ -93,19 +93,24 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                    // RED
-
 
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                         <TextView
-                                android:text="TextView"
+                                android:text="Managing:"
+                                android:textColor="@color/colorOneColorText"
+                                android:textSize="20sp"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" android:id="@+id/textView6"
-                                android:layout_weight="1"/>
+                                android:layout_height="wrap_content" android:id="@+id/textView6"/>
+                        <Spinner
+                                android:layout_marginLeft="5dp"
+                                android:layout_width="140dp"
+                                android:entries="@array/spinner_one_color"
+                                android:layout_height="wrap_content" android:id="@+id/spinnerOneColorMode"/>
                     </LinearLayout>
+                    // RED
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_marginTop="10dp"
@@ -173,13 +178,13 @@
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_marginTop="15dp"
-                    android:background="@color/colorEffectsBack"
+                    android:background="@color/colorEffectsPicBack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 <Button
-                        android:text="EFFECTS"
-                        android:background="@color/colorEffectsBack"
-                        android:textColor="@color/colorEffectsText"
+                        android:text="PICTURE EFFECTS"
+                        android:background="@color/colorEffectsPicBack"
+                        android:textColor="@color/colorEffectsPicText"
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:layout_width="match_parent"
@@ -187,7 +192,7 @@
                 <LinearLayout
                         android:orientation="vertical"
                         android:id="@+id/pageEffects"
-                        android:background="@color/colorEffectsBack"
+                        android:background="@color/colorEffectsPicBack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                     <LinearLayout
@@ -195,8 +200,25 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                         <TextView
+                                android:text="Color HSV:"
+                                android:textColor="@color/colorEffectsPicText"
+                                android:textSize="20sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/textView7"/>
+                        <SeekBar
+                                android:background="@drawable/hsv_line"
+                                android:max="255"
+                                android:progress="0"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/seekColorHSV"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
                                 android:text="Speed:"
-                                android:textColor="@color/colorEffectsText"
+                                android:textColor="@color/colorEffectsPicText"
                                 android:textSize="20sp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView2"/>
@@ -212,11 +234,10 @@
                             android:layout_height="match_parent">
                         <TextView
                                 android:text="Effect:"
-                                android:textColor="@color/colorEffectsText"
-                                android:layout_width="wrap_content"
+                                android:textColor="@color/colorEffectsPicText"
+                                android:layout_width="100dp"
                                 android:layout_height="wrap_content" android:id="@+id/textView"
-                                android:textSize="20sp"
-                        />
+                                android:textSize="20sp"/>
                         <Spinner
                                 android:layout_marginLeft="4dp"
                                 android:spinnerMode="dropdown"
@@ -224,7 +245,7 @@
                                 android:layout_height="wrap_content" android:id="@+id/spinnerEffects"
                                 android:entries="@array/spinner_effects"/>
                         <ImageView
-                                android:layout_marginLeft="120dp"
+                                android:layout_marginLeft="50dp"
                                 android:layout_width="39dp"
                                 android:layout_height="39dp"
                                 app:srcCompat="@drawable/icon_search" android:id="@+id/imageEffects"/>
@@ -233,6 +254,92 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+
+
+
+            // WALL EFFECTS
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/colorEffectsWallBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <Button
+                        android:text="WALL EFFECTS"
+                        android:background="@color/colorEffectsWallBack"
+                        android:textColor="@color/colorEffectsWallText"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/buttEffectsWall"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:id="@+id/pageEffectsWall"
+                        android:background="@color/colorEffectsWallBack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Color HSV:"
+                                android:textColor="@color/colorEffectsWallText"
+                                android:textSize="20sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/textView8"/>
+                        <SeekBar
+                                android:background="@drawable/hsv_line"
+                                android:max="255"
+                                android:progress="0"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/seekColorHSVWall"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Speed:"
+                                android:textColor="@color/colorEffectsWallText"
+                                android:textSize="20sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/textView13"/>
+                        <SeekBar
+                                android:max="100"
+                                android:progress="10"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/seekSpeedWall"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Effect:"
+                                android:textColor="@color/colorEffectsWallText"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content" android:id="@+id/textView12"
+                                android:textSize="20sp"/>
+                        <Spinner
+                                android:layout_marginLeft="4dp"
+                                android:spinnerMode="dropdown"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/spinnerEffectsWall"
+                                android:entries="@array/spinner_effects"/>
+                        <ImageView
+                                android:layout_marginLeft="50dp"
+                                android:layout_width="39dp"
+                                android:layout_height="39dp"
+                                app:srcCompat="@drawable/icon_search" android:id="@+id/imageEffectsWall"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>

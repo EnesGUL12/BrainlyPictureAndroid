@@ -18,9 +18,11 @@
     <color name="colorOneColorBack">#FFEB3B</color>
     <color name="colorOneColorText">#3F51B5</color>
 
-    // EFFECTS
-    <color name="colorEffectsBack">#673AB7</color>
-    <color name="colorEffectsText">#FFEB3B</color>
+    // EFFECTS PIC
+    <color name="colorEffectsPicBack">#673AB7</color>
+    <color name="colorEffectsPicText">#FFEB3B</color>
 
+    <color name="colorEffectsWallBack">#2196F3</color>
+    <color name="colorEffectsWallText">#9C27B0</color>
 
 </resources>

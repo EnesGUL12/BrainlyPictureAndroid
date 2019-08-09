@@ -4,21 +4,30 @@
     <string-array name="spinner_effects">
         <item> </item>
         <item>Rainbow Fade</item>
-        <item>Color Bounce</item>
-        <item>Color Bounce Fade</item>
-        <item>pulse</item>
-        <item>Fade Vertical</item>
-        <item>random red</item>
-        <item>radiation</item>
-        <item>color loop vardelay</item>
-        <item>white temps </item>
-        <item>sin bright wave</item>
-        <item>pop horizontal</item>
-        <item>quad bright curve</item>
-        <item>flame</item>
-        <item>rainbow vertical </item>
-        <item>pacman</item>
-        <item>egb propeller</item>
-        <item> </item>
+        <item>Random Burst</item>
+        <item>Pulse</item>
+        <item>Radiation</item>
+        <item>Flame</item>
+        <item>Rainbow Vertical </item>
+        <item>Rgb Propeller</item>
+        <item>New Rainbow</item>
+        <item>Matrix</item>
+        <item>Random March</item>
+        <item>Rwd March</item>
+    </string-array>
+    
+    <string-array name="spinner_one_color">
+        <item>All</item>
+        <item>Planet</item>
+        <item>First Building</item>
+        <item>Second Building </item>
+        <item>City</item>
+        <item>Little Building</item>
+        <item>Wall All</item>
+        <item>Wall 1</item>
+        <item>Wall 2</item>
+        <item>Wall 3</item>
+        <item>Wall 4</item>
+        <item>Wall 5</item>
     </string-array>
 </resources>

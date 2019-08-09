@@ -22,22 +22,16 @@ var flag_start: Boolean = false
 var effects_image = arrayOf(
     R.drawable.icon_search,
     R.drawable.icon_rainbow,
-    R.drawable.icon_ball,
-    R.drawable.icon_ball,
-    R.drawable.icon_search,
-    R.drawable.icon_search,
-    R.drawable.icon_search,
-    R.drawable.icon_search,
-    R.drawable.icon_search,
-    R.drawable.icon_search,
-    R.drawable.icon_search,
-    R.drawable.icon_search,
-    R.drawable.icon_search,
-    R.drawable.icon_search,
-    R.drawable.icon_search,
-    R.drawable.icon_search,
-    R.drawable.icon_search,
-    R.drawable.icon_search
+    R.drawable.icon_burst,
+    R.drawable.icon_pulse,
+    R.drawable.icon_radiation,
+    R.drawable.icon_flame,
+    R.drawable.icon_rainbow_vertical,
+    R.drawable.icon_rainbow_propeler,
+    R.drawable.icon_new_rainbow,
+    R.drawable.icon_matrix,
+    R.drawable.icon_march,
+    R.drawable.icon_march2
     )
 
 
@@ -73,12 +67,21 @@ class MainActivity : AppCompatActivity() {
         val seek_red = seekRed
         val seek_blue = seekGreen
         val seek_green = seekBlue
+        val spinner_one_color_mode = spinnerOneColorMode
 
         val page_effects = pageEffects
         val butt_effects = buttEffects
         val spinner_effects = spinnerEffects
         val image_effects = imageEffects
         val seek_speed =seekSpeed
+        val seek_hsv = seekColorHSV
+
+        val page_wall_effects = pageEffectsWall
+        val butt_wall_effects = buttEffectsWall
+        val spinner_wall_effects = spinnerEffectsWall
+        val image_wall_effects = imageEffectsWall
+        val seek_wall_speed =seekSpeedWall
+        val seek_wall_hsv = seekColorHSVWall
 
 
         val clientId = MqttClient.generateClientId()
@@ -105,10 +108,12 @@ class MainActivity : AppCompatActivity() {
                     Log.d("file", "onSuccess")
 
                     subscribe(client, "picture/connect")
-                    subscribe(client, "picture/effect")
-                    subscribe(client, "picture/red")
-                    subscribe(client, "picture/green")
-                    subscribe(client, "picture/blue")
+                    subscribe(client, "picture/pic/effect/speed")
+                    subscribe(client, "picture/wall/effect/speed")
+                    subscribe(client, "picture/pic/effect_one_color")
+                    subscribe(client, "picture/pic/red")
+                    subscribe(client, "picture/pic/green")
+                    subscribe(client, "picture/pic/blue")
 
 
 
@@ -120,6 +125,7 @@ class MainActivity : AppCompatActivity() {
                         page_one_color.visibility = View.GONE
                         page_effects.visibility = View.GONE
                         flag_start = true
+                        publish(client, seek_brightness.progress.toString(), "picture/brightness")
                     }
 
 
@@ -129,6 +135,7 @@ class MainActivity : AppCompatActivity() {
                         if(!page_settings.isVisible) {
                             page_settings.visibility = View.VISIBLE
                             publish(client, "info", "picture/connect")
+                            publish(client, seek_brightness.progress.toString(), "picture/brightness")
                         }
                         else{
                             page_settings.visibility = View.GONE
@@ -152,7 +159,7 @@ class MainActivity : AppCompatActivity() {
                     butt_one_color.setOnClickListener(View.OnClickListener {
                         if(!page_one_color.isVisible) {
                             page_one_color.visibility = View.VISIBLE
-                            publish(client, "30", "picture/effect")
+                            publish(client, "30", "picture/pic/effect")
                         }
                         else{
                             page_one_color.visibility = View.GONE
@@ -205,6 +212,20 @@ class MainActivity : AppCompatActivity() {
                     })
 
 
+                    spinner_one_color_mode.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>,
+                            itemSelected: View, selectedItemPosition: Int, selectedId: Long) {
+
+                            publish(client, selectedItemPosition.toString(), "picture/pic/effect_one_color")
+
+                        }
+                        override fun onNothingSelected(arg0: AdapterView<*>) {
+
+                        }
+                    })
+
+
 
                     // EFFECTS PAGE
                     butt_effects.setOnClickListener(View.OnClickListener {
@@ -222,7 +243,7 @@ class MainActivity : AppCompatActivity() {
                             parent: AdapterView<*>,
                             itemSelected: View, selectedItemPosition: Int, selectedId: Long) {
 
-                            publish(client, selectedItemPosition.toString(), "picture/effect")
+                            publish(client, selectedItemPosition.toString(), "picture/pic/effect")
 
                             image_effects.setImageResource(effects_image[selectedItemPosition]);
                             }
@@ -234,7 +255,20 @@ class MainActivity : AppCompatActivity() {
 
                     seek_speed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                            publish(client, progress.toString(), "picture/effect/speed")
+                            publish(client, progress.toString(), "picture/pic/effect/speed")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
+                    seek_hsv.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/pic/effect/color")
                         }
 
                         override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -246,9 +280,56 @@ class MainActivity : AppCompatActivity() {
 
 
 
+                    // EFFECTS WALL PAGE
+                    butt_wall_effects.setOnClickListener(View.OnClickListener {
+                        if(!page_wall_effects.isVisible) {
+                            page_wall_effects.visibility = View.VISIBLE
+                        }
+                        else{
+                            page_wall_effects.visibility = View.GONE
+                        }
+                    })
 
 
+                    spinner_wall_effects.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>,
+                            itemSelected: View, selectedItemPosition: Int, selectedId: Long) {
 
+                            publish(client, selectedItemPosition.toString(), "picture/wall/effect")
+
+                            image_wall_effects.setImageResource(effects_image[selectedItemPosition]);
+                        }
+                        override fun onNothingSelected(arg0: AdapterView<*>) {
+
+                        }
+                    })
+
+
+                    seek_wall_speed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/wall/effect/speed")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
+                    seek_wall_hsv.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/wall/effect/color")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
 
 
 
