@@ -200,6 +200,22 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                         <TextView
+                                android:text="Brightness:"
+                                android:textColor="@color/colorEffectsPicText"
+                                android:textSize="20sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView5"/>
+                        <SeekBar
+                                android:max = "200"
+                                android:progress="100"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/seekBrightnessPic"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
                                 android:text="Color HSV:"
                                 android:textColor="@color/colorEffectsPicText"
                                 android:textSize="20sp"
@@ -280,6 +296,22 @@
                         android:background="@color/colorEffectsWallBack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Brightness:"
+                                android:textColor="@color/colorEffectsPicText"
+                                android:textSize="20sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView15"/>
+                        <SeekBar
+                                android:max ="200"
+                                android:progress="100"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/seekBrightnessWall"/>
+                    </LinearLayout>
                     <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"

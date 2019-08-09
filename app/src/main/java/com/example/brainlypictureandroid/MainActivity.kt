@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         connect()
     }
 
-
+    //TODO: Make auto sending data(brightness and more)
 
 
     fun connect() {
@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
         val image_effects = imageEffects
         val seek_speed =seekSpeed
         val seek_hsv = seekColorHSV
+        val seek_bright = seekBrightnessPic
 
         val page_wall_effects = pageEffectsWall
         val butt_wall_effects = buttEffectsWall
@@ -82,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         val image_wall_effects = imageEffectsWall
         val seek_wall_speed =seekSpeedWall
         val seek_wall_hsv = seekColorHSVWall
+        val seek_wall_bright = seekBrightnessWall
 
 
         val clientId = MqttClient.generateClientId()
@@ -124,6 +126,7 @@ class MainActivity : AppCompatActivity() {
                         page_settings.visibility = View.GONE
                         page_one_color.visibility = View.GONE
                         page_effects.visibility = View.GONE
+                        page_wall_effects.visibility = View.GONE
                         flag_start = true
                         publish(client, seek_brightness.progress.toString(), "picture/brightness")
                     }
@@ -279,6 +282,19 @@ class MainActivity : AppCompatActivity() {
                     })
 
 
+                    seek_bright.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/pic/effect/brightness")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
 
                     // EFFECTS WALL PAGE
                     butt_wall_effects.setOnClickListener(View.OnClickListener {
@@ -322,6 +338,19 @@ class MainActivity : AppCompatActivity() {
                     seek_wall_hsv.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                             publish(client, progress.toString(), "picture/wall/effect/color")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
+                    seek_wall_bright.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/wall/effect/brightness")
                         }
 
                         override fun onStartTrackingTouch(seekBar: SeekBar?) {
