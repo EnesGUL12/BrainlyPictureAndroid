@@ -50,6 +50,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     //TODO: Make auto sending data(brightness and more)
+    //TODO: Add brightness, speed, color, switch
+    //TODO: Fixed topics and design names
+
 
 
     fun connect() {
@@ -84,6 +87,10 @@ class MainActivity : AppCompatActivity() {
         val seek_wall_hsv = seekColorHSVWall
         val seek_wall_bright = seekBrightnessWall
 
+        val page_auto = pageAuto
+        val butt_auto = buttAuto
+        val spinner_auto_place = spinnerPlace
+        val spinner_auto_effect = spinnerEffectAuto
 
         val clientId = MqttClient.generateClientId()
         val client = MqttAndroidClient(
@@ -360,6 +367,41 @@ class MainActivity : AppCompatActivity() {
                     })
 
 
+
+                    // AUTO PAGE
+                    butt_auto.setOnClickListener(View.OnClickListener {
+                        if(!page_auto.isVisible) {
+                            page_auto.visibility = View.VISIBLE
+                        }
+                        else{
+                            page_auto.visibility = View.GONE
+                        }
+                    })
+
+
+                    spinner_auto_place.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>,
+                            itemSelected: View, selectedItemPosition: Int, selectedId: Long) {
+
+                            publish(client, selectedItemPosition.toString(), "picture/pic/auto/place")
+                        }
+                        override fun onNothingSelected(arg0: AdapterView<*>) {
+
+                        }
+                    })
+
+                    spinner_auto_effect.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>,
+                            itemSelected: View, selectedItemPosition: Int, selectedId: Long) {
+
+                            publish(client, selectedItemPosition.toString(), "picture/pic/auto/effect")
+                        }
+                        override fun onNothingSelected(arg0: AdapterView<*>) {
+
+                        }
+                    })
 
 
 
