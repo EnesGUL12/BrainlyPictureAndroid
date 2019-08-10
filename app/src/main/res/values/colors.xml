@@ -25,4 +25,7 @@
     <color name="colorEffectsWallBack">#2196F3</color>
     <color name="colorEffectsWallText">#9C27B0</color>
 
+    <color name="colorAutoBack">#FF9800</color>
+    <color name="colorAutoText">#4CAF50</color>
+
 </resources>

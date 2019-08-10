@@ -25,6 +25,7 @@
                       android:layout_marginRight="10dp"
                       android:orientation="vertical">
             // SETTINGS PAGE
+
             <LinearLayout
                     android:orientation="vertical"
                     android:background="@color/colorSettBack"
@@ -369,12 +370,67 @@
 
                     </LinearLayout>
                 </LinearLayout>
+            </LinearLayout>
 
+
+            // AUTOMATION
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/colorEffectsWallBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <Button
+                        android:text="Automation"
+                        android:background="@color/colorAutoBack"
+                        android:textColor="@color/colorAutoText"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/buttAuto"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:id="@+id/pageAuto"
+                        android:background="@color/colorAutoBack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                            <TextView
+                                    android:text="Place:"
+                                    android:textSize="20sp"
+                                    android:textColor="@color/colorAutoText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" android:id="@+id/textView14"/>
+                            <Spinner
+                                    android:entries="@array/spinner_place"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content" android:id="@+id/spinnerPlace"/>
+                            <TextView
+                                    android:text="Effect:"
+                                    android:textSize="20sp"
+                                    android:textColor="@color/colorAutoText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" android:id="@+id/textView16"/>
+                            <Spinner
+                                    android:entries="@array/spinner_effects"
+                                    android:layout_width="170dp"
+                                    android:layout_height="wrap_content" android:id="@+id/spinnerEffectAuto"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
 
 
         </LinearLayout>
     </ScrollView>
+
     <TextView
             android:layout_width="139dp"
             android:layout_height="19dp"

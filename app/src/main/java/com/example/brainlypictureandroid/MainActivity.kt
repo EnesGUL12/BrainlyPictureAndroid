@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
 
 
     fun connect() {
-        val scroll_main = scrollMain
         val text_payload = textPayload
         val text_topic = textTopic
 
@@ -408,7 +407,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun publish(client: MqttAndroidClient, payload: String, topic: String) {
-        var encodedPayload = ByteArray(0)
+        var encodedPayload: ByteArray
         try {
             encodedPayload = payload.toByteArray(charset("UTF-8"))
             val message = MqttMessage(encodedPayload)
