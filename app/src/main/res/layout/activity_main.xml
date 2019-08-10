@@ -19,7 +19,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="1.0">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:layout_marginLeft="10dp"
                       android:layout_marginRight="10dp"
@@ -207,7 +208,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:id="@+id/textView5"/>
                         <SeekBar
-                                android:max = "200"
+                                android:max="200"
                                 android:progress="100"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/seekBrightnessPic"/>
@@ -273,8 +274,6 @@
             </LinearLayout>
 
 
-
-
             // WALL EFFECTS
 
             <LinearLayout
@@ -308,7 +307,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:id="@+id/textView15"/>
                         <SeekBar
-                                android:max ="200"
+                                android:max="200"
                                 android:progress="100"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/seekBrightnessWall"/>
@@ -394,35 +393,86 @@
                         android:background="@color/colorAutoBack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+                    <ToggleButton
+                            android:text="ToggleButton"
+                            android:background="@color/colorAutoToggle"
+                            android:textColor="@color/colorAutoText"
+                            android:layout_marginLeft="160dp"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content" android:id="@+id/toggleAuto"/>
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
-                        <LinearLayout
-                                android:orientation="horizontal"
+                        <TextView
+                                android:text="Place:"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorAutoText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView14"/>
+                        <Spinner
+                                android:entries="@array/spinner_place"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content" android:id="@+id/spinnerPlace"/>
+                        <TextView
+                                android:text="Effect:"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorAutoText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView16"/>
+                        <Spinner
+                                android:entries="@array/spinner_effects"
+                                android:layout_width="170dp"
+                                android:layout_height="wrap_content" android:id="@+id/spinnerEffectAuto"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Brightness:"
+                                android:textColor="@color/colorAutoText"
+                                android:textSize="20sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView19"/>
+                        <SeekBar
+                                android:max="200"
+                                android:progress="100"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                            <TextView
-                                    android:text="Place:"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/colorAutoText"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" android:id="@+id/textView14"/>
-                            <Spinner
-                                    android:entries="@array/spinner_place"
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content" android:id="@+id/spinnerPlace"/>
-                            <TextView
-                                    android:text="Effect:"
-                                    android:textSize="20sp"
-                                    android:textColor="@color/colorAutoText"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" android:id="@+id/textView16"/>
-                            <Spinner
-                                    android:entries="@array/spinner_effects"
-                                    android:layout_width="170dp"
-                                    android:layout_height="wrap_content" android:id="@+id/spinnerEffectAuto"/>
-                        </LinearLayout>
+                                android:layout_height="wrap_content" android:id="@+id/seekBrightnessAuto"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Color HSV:"
+                                android:textColor="@color/colorAutoText"
+                                android:textSize="20sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/textView21"/>
+                        <SeekBar
+                                android:background="@drawable/hsv_line"
+                                android:max="255"
+                                android:progress="0"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/seekColorHSVAuto"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Speed:"
+                                android:textColor="@color/colorAutoText"
+                                android:textSize="20sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/textView20"/>
+                        <SeekBar
+                                android:max="100"
+                                android:progress="10"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/seekSpeedAuto"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

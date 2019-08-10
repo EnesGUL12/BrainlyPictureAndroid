@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.CompoundButton
 import android.widget.SeekBar
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_main.*
@@ -52,6 +53,9 @@ class MainActivity : AppCompatActivity() {
     //TODO: Make auto sending data(brightness and more)
     //TODO: Add brightness, speed, color, switch
     //TODO: Fixed topics and design names
+    //TODO: Rename auto functions names
+    //TODO: Fix speed topic
+    //TODO: Add warning
 
 
 
@@ -91,6 +95,10 @@ class MainActivity : AppCompatActivity() {
         val butt_auto = buttAuto
         val spinner_auto_place = spinnerPlace
         val spinner_auto_effect = spinnerEffectAuto
+        val seek_auto_speed =seekSpeedAuto
+        val seek_auto_hsv = seekColorHSVAuto
+        val seek_auto_bright = seekBrightnessAuto
+        val toggle_auto = toggleAuto
 
         val clientId = MqttClient.generateClientId()
         val client = MqttAndroidClient(
@@ -402,6 +410,59 @@ class MainActivity : AppCompatActivity() {
 
                         }
                     })
+
+                    seek_auto_speed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/pic/effect/speed")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
+                    seek_auto_hsv.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/pic/effect/color")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
+                    seek_auto_bright.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/pic/effect/brightness")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
+                    toggle_auto.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener{buttonView, isChecked ->
+                        if(isChecked){
+                            publish(client, "on", "picture/pic/auto")
+                            toggle_auto.setBackgroundColor(Color.GREEN)
+                        }
+                        else{
+                            publish(client, "off", "picture/pic/auto")
+                            toggle_auto.setBackgroundColor(Color.DKGRAY)
+                        }
+                    })
+
+
+
 
 
 

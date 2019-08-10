@@ -27,5 +27,6 @@
 
     <color name="colorAutoBack">#FF9800</color>
     <color name="colorAutoText">#4CAF50</color>
+    <color name="colorAutoToggle">#858585</color>
 
 </resources>
