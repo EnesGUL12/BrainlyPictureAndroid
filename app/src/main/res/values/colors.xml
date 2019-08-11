@@ -31,5 +31,7 @@
     <color name="colorPicAutoText">#4CAF50</color>
     <color name="colorPicAutoToggle">#858585</color>
     <color name="colorPicAutoTextTime">#00BCD4</color>
+    <color name="colorPicAutoButtTime">#00BCD4</color>
+    <color name="colorPicAutoButtTimeText">#FFEB3B</color>
 
 </resources>
