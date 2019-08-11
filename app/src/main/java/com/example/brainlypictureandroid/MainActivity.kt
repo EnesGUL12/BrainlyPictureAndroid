@@ -50,10 +50,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     //TODO: Make auto sending data(brightness and more)
-    //TODO: Fix speed topic
     //TODO: Add warning
     //TODO: Make auto initial all empty labels
-
+    //TODO: Check auto minutes
+    //TODO: Check auto empty effects
+    //TODO: Add EEPROM
+    //TODO: Fix effects speed
 
 
     fun connect() {
@@ -126,12 +128,18 @@ class MainActivity : AppCompatActivity() {
                     Log.d("file", "onSuccess")
 
                     subscribe(client, "picture/connect")
+                    subscribe(client, "picture/info")
                     subscribe(client, "picture/pic/effect/speed")
                     subscribe(client, "picture/wall/effect/speed")
                     subscribe(client, "picture/pic/effect_one_color")
                     subscribe(client, "picture/pic/red")
                     subscribe(client, "picture/pic/green")
                     subscribe(client, "picture/pic/blue")
+                    subscribe(client, "picture/time")
+                    subscribe(client, "picture/pic/auto/start/hour")
+                    subscribe(client, "picture/pic/auto/start/min")
+                    subscribe(client, "picture/pic/auto/end/hour")
+                    subscribe(client, "picture/pic/auto/end/min")
 
 
 
@@ -155,7 +163,9 @@ class MainActivity : AppCompatActivity() {
                         if(!page_settings.isVisible) {
                             page_settings.visibility = View.VISIBLE
                             publish(client, "info", "picture/connect")
+                            publish(client, "info", "picture/info")
                             publish(client, seek_brightness.progress.toString(), "picture/brightness")
+
                         }
                         else{
                             page_settings.visibility = View.GONE
@@ -416,7 +426,7 @@ class MainActivity : AppCompatActivity() {
 
                     seek_pic_auto_speed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                            publish(client, progress.toString(), "picture/pic/effect/speed")
+                            publish(client, progress.toString(), "picture/effect/speed")
                         }
 
                         override fun onStartTrackingTouch(seekBar: SeekBar?) {
