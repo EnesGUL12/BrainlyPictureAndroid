@@ -1,22 +1,23 @@
 package com.example.brainlypictureandroid
 
+import android.annotation.SuppressLint
+import android.app.ProgressDialog.show
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.CompoundButton
-import android.widget.SeekBar
+import android.widget.*
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_main.*
 import org.eclipse.paho.android.service.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 import java.io.UnsupportedEncodingException
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
-
-
-
+import android.widget.TimePicker
+import android.app.TimePickerDialog
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 var flag_start: Boolean = false
@@ -51,8 +52,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     //TODO: Make auto sending data(brightness and more)
-    //TODO: Fixed topics and design names
-    //TODO: Rename auto functions names
     //TODO: Fix speed topic
     //TODO: Add warning
     //TODO: Make auto initial all empty labels
@@ -99,8 +98,10 @@ class MainActivity : AppCompatActivity() {
         val seek_pic_auto_hsv = seekPicAutoColorHSV
         val seek_pic_auto_bright = seekPicAutoBrightness
         val toggle_pic_auto = togglePicAuto
-        val text_pic_auto_timer = textPicAutoTime
+        val text_pic_auto_timer = textPicAutoTimer
         val seek_pic_auto_timer = seekPicAutoTimer
+        val butt_pic_auto_time = buttPicAutoTime
+        val text_pic_auto_time = textPicAutoTime
 
         val clientId = MqttClient.generateClientId()
         val client = MqttAndroidClient(
@@ -121,6 +122,7 @@ class MainActivity : AppCompatActivity() {
             val token = client.connect(options)
             //IMqttToken token = client.connect();
             token.actionCallback = object : IMqttActionListener {
+                @SuppressLint("SimpleDateFormat")
                 override fun onSuccess(asyncActionToken: IMqttToken) {
                     // We are connected
                     Log.d("file", "onSuccess")
@@ -143,6 +145,7 @@ class MainActivity : AppCompatActivity() {
                         page_one_color.visibility = View.GONE
                         page_effects.visibility = View.GONE
                         page_wall_effects.visibility = View.GONE
+                        page_pic_auto.visibility = View.GONE
                         flag_start = true
                         publish(client, seek_brightness.progress.toString(), "picture/brightness")
                     }
@@ -246,7 +249,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-                    // EFFECTS PAGE
+                    // PIC EFFECTS PAGE
                     butt_effects.setOnClickListener(View.OnClickListener {
                         if(!page_effects.isVisible) {
                             page_effects.visibility = View.VISIBLE
@@ -274,7 +277,7 @@ class MainActivity : AppCompatActivity() {
 
                     seek_speed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                            publish(client, progress.toString(), "picture/pic/effect/speed")
+                            publish(client, progress.toString(), "picture/effect/speed")
                         }
 
                         override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -340,7 +343,7 @@ class MainActivity : AppCompatActivity() {
 
                     seek_wall_speed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                            publish(client, progress.toString(), "picture/wall/effect/speed")
+                            publish(client, progress.toString(), "picture/effect/speed")
                         }
 
                         override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -476,6 +479,22 @@ class MainActivity : AppCompatActivity() {
                         override fun onStopTrackingTouch(seekBar: SeekBar?) {
                         }
                     })
+
+
+
+
+                    butt_pic_auto_time.setOnClickListener {
+                        val cal = Calendar.getInstance()
+                        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                            cal.set(Calendar.HOUR_OF_DAY, hour)
+                            cal.set(Calendar.MINUTE, minute)
+                            text_pic_auto_time.text = SimpleDateFormat("HH:mm").format(cal.time)
+                        }
+                        TimePickerDialog(this@MainActivity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+                    }
+
+
+
 
 
 

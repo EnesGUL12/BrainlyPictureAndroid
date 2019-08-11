@@ -401,6 +401,24 @@
                             android:layout_height="wrap_content" android:id="@+id/togglePicAuto"/>
 
                     <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Time"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorPicAutoText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/textPicAutoTime"/>
+                        <Button
+                                android:text="Click to choose time"
+                                android:background="@color/colorPicAutoToggle"
+                                android:textColor="@color/colorPicAutoText"
+                                android:textSize="20sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/buttPicAutoTime"/>
+                    </LinearLayout>
+                    <LinearLayout
                             android:layout_marginTop="5dp"
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
@@ -436,7 +454,7 @@
                                 android:textSize="20sp"
                                 android:textColor="@color/colorPicAutoTextTime"
                                 android:layout_width="25dp"
-                                android:layout_height="wrap_content" android:id="@+id/textPicAutoTime"/>
+                                android:layout_height="wrap_content" android:id="@+id/textPicAutoTimer"/>
                         <TextView
                                 android:text="min"
                                 android:textSize="20sp"
