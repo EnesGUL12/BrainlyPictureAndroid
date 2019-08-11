@@ -51,11 +51,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     //TODO: Make auto sending data(brightness and more)
-    //TODO: Add brightness, speed, color, switch
     //TODO: Fixed topics and design names
     //TODO: Rename auto functions names
     //TODO: Fix speed topic
     //TODO: Add warning
+    //TODO: Make auto initial all empty labels
 
 
 
@@ -75,30 +75,32 @@ class MainActivity : AppCompatActivity() {
         val seek_green = seekBlue
         val spinner_one_color_mode = spinnerOneColorMode
 
-        val page_effects = pageEffects
-        val butt_effects = buttEffects
-        val spinner_effects = spinnerEffects
+        val page_effects = pagePicEffects
+        val butt_effects = buttPicEffects
+        val spinner_effects = spinnerPicEffects
         val image_effects = imageEffects
-        val seek_speed =seekSpeed
-        val seek_hsv = seekColorHSV
-        val seek_bright = seekBrightnessPic
+        val seek_speed =seekPicSpeed
+        val seek_hsv = seekPicColorHSV
+        val seek_bright = seekPicBrightness
 
         val page_wall_effects = pageEffectsWall
-        val butt_wall_effects = buttEffectsWall
-        val spinner_wall_effects = spinnerEffectsWall
-        val image_wall_effects = imageEffectsWall
-        val seek_wall_speed =seekSpeedWall
-        val seek_wall_hsv = seekColorHSVWall
-        val seek_wall_bright = seekBrightnessWall
+        val butt_wall_effects = buttWallEffects
+        val spinner_wall_effects = spinnerWallEffects
+        val image_wall_effects = imageWallEffects
+        val seek_wall_speed =seekWallSpeed
+        val seek_wall_hsv = seekWallColorHSV
+        val seek_wall_bright = seekWallBrightness
 
-        val page_auto = pageAuto
-        val butt_auto = buttAuto
-        val spinner_auto_place = spinnerPlace
-        val spinner_auto_effect = spinnerEffectAuto
-        val seek_auto_speed =seekSpeedAuto
-        val seek_auto_hsv = seekColorHSVAuto
-        val seek_auto_bright = seekBrightnessAuto
-        val toggle_auto = toggleAuto
+        val page_pic_auto = pageAuto
+        val butt_pic_auto = buttPicAuto
+        val spinner_pic_auto_place = spinnerPlace
+        val spinner_pic_auto_effect = spinnerEffectAuto
+        val seek_pic_auto_speed =seekPicAutoSpeed
+        val seek_pic_auto_hsv = seekPicAutoColorHSV
+        val seek_pic_auto_bright = seekPicAutoBrightness
+        val toggle_pic_auto = togglePicAuto
+        val text_pic_auto_timer = textPicAutoTime
+        val seek_pic_auto_timer = seekPicAutoTimer
 
         val clientId = MqttClient.generateClientId()
         val client = MqttAndroidClient(
@@ -234,7 +236,7 @@ class MainActivity : AppCompatActivity() {
                             parent: AdapterView<*>,
                             itemSelected: View, selectedItemPosition: Int, selectedId: Long) {
 
-                            publish(client, selectedItemPosition.toString(), "picture/pic/effect_one_color")
+                            publish(client, selectedItemPosition.toString(), "picture/effect_one_color")
 
                         }
                         override fun onNothingSelected(arg0: AdapterView<*>) {
@@ -377,17 +379,17 @@ class MainActivity : AppCompatActivity() {
 
 
                     // AUTO PAGE
-                    butt_auto.setOnClickListener(View.OnClickListener {
-                        if(!page_auto.isVisible) {
-                            page_auto.visibility = View.VISIBLE
+                    butt_pic_auto.setOnClickListener(View.OnClickListener {
+                        if(!page_pic_auto.isVisible) {
+                            page_pic_auto.visibility = View.VISIBLE
                         }
                         else{
-                            page_auto.visibility = View.GONE
+                            page_pic_auto.visibility = View.GONE
                         }
                     })
 
 
-                    spinner_auto_place.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                    spinner_pic_auto_place.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
                         override fun onItemSelected(
                             parent: AdapterView<*>,
                             itemSelected: View, selectedItemPosition: Int, selectedId: Long) {
@@ -399,7 +401,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     })
 
-                    spinner_auto_effect.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                    spinner_pic_auto_effect.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
                         override fun onItemSelected(
                             parent: AdapterView<*>,
                             itemSelected: View, selectedItemPosition: Int, selectedId: Long) {
@@ -411,7 +413,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     })
 
-                    seek_auto_speed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                    seek_pic_auto_speed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                             publish(client, progress.toString(), "picture/pic/effect/speed")
                         }
@@ -424,7 +426,7 @@ class MainActivity : AppCompatActivity() {
                     })
 
 
-                    seek_auto_hsv.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                    seek_pic_auto_hsv.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                             publish(client, progress.toString(), "picture/pic/effect/color")
                         }
@@ -437,7 +439,7 @@ class MainActivity : AppCompatActivity() {
                     })
 
 
-                    seek_auto_bright.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                    seek_pic_auto_bright.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                             publish(client, progress.toString(), "picture/pic/effect/brightness")
                         }
@@ -450,14 +452,28 @@ class MainActivity : AppCompatActivity() {
                     })
 
 
-                    toggle_auto.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener{buttonView, isChecked ->
+                    toggle_pic_auto.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener{ _, isChecked ->
                         if(isChecked){
                             publish(client, "on", "picture/pic/auto")
-                            toggle_auto.setBackgroundColor(Color.GREEN)
+                            toggle_pic_auto.setBackgroundColor(Color.GREEN)
                         }
                         else{
                             publish(client, "off", "picture/pic/auto")
-                            toggle_auto.setBackgroundColor(Color.DKGRAY)
+                            toggle_pic_auto.setBackgroundColor(Color.DKGRAY)
+                        }
+                    })
+
+
+                    seek_pic_auto_timer.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/pic/auto/timer")
+                            text_pic_auto_timer.text = progress.toString()
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
                         }
                     })
 
@@ -488,7 +504,7 @@ class MainActivity : AppCompatActivity() {
 
 
                             text_payload.text = message.toString()
-                            text_topic.text = topic.toString()
+                            text_topic.text = topic
                         }
 
                         override fun deliveryComplete(token: IMqttDeliveryToken) {
@@ -509,6 +525,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
+
     fun publish(client: MqttAndroidClient, payload: String, topic: String) {
         var encodedPayload: ByteArray
         try {
@@ -522,6 +541,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
 
     fun subscribe(client: MqttAndroidClient, topic: String) {

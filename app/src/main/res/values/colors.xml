@@ -18,15 +18,18 @@
     <color name="colorOneColorBack">#FFEB3B</color>
     <color name="colorOneColorText">#3F51B5</color>
 
-    // EFFECTS PIC
-    <color name="colorEffectsPicBack">#673AB7</color>
-    <color name="colorEffectsPicText">#FFEB3B</color>
+    // EFFECTS PIC PAGE
+    <color name="colorPicEffectsBack">#673AB7</color>
+    <color name="colorPicEffectsText">#FFEB3B</color>
 
-    <color name="colorEffectsWallBack">#2196F3</color>
-    <color name="colorEffectsWallText">#9C27B0</color>
+    // EFFECTS WALL PAGE
+    <color name="colorWallEffectsBack">#2196F3</color>
+    <color name="colorWallEffectsText">#9C27B0</color>
 
-    <color name="colorAutoBack">#FF9800</color>
-    <color name="colorAutoText">#4CAF50</color>
-    <color name="colorAutoToggle">#858585</color>
+    // AUTO PAGE
+    <color name="colorPicAutoBack">#FF9800</color>
+    <color name="colorPicAutoText">#4CAF50</color>
+    <color name="colorPicAutoToggle">#858585</color>
+    <color name="colorPicAutoTextTime">#00BCD4</color>
 
 </resources>

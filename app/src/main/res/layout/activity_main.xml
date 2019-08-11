@@ -101,7 +101,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                         <TextView
-                                android:text="Managing:"
+                                android:text="Setting:"
                                 android:textColor="@color/colorOneColorText"
                                 android:textSize="20sp"
                                 android:layout_width="wrap_content"
@@ -175,26 +175,26 @@
             </LinearLayout>
 
 
-            // EFFECTS
+            // EFFECTS PIC
 
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_marginTop="15dp"
-                    android:background="@color/colorEffectsPicBack"
+                    android:background="@color/colorPicEffectsBack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 <Button
                         android:text="PICTURE EFFECTS"
-                        android:background="@color/colorEffectsPicBack"
-                        android:textColor="@color/colorEffectsPicText"
+                        android:background="@color/colorPicEffectsBack"
+                        android:textColor="@color/colorPicEffectsText"
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/buttEffects"/>
+                        android:layout_height="wrap_content" android:id="@+id/buttPicEffects"/>
                 <LinearLayout
                         android:orientation="vertical"
-                        android:id="@+id/pageEffects"
-                        android:background="@color/colorEffectsPicBack"
+                        android:id="@+id/pagePicEffects"
+                        android:background="@color/colorPicEffectsBack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                     <LinearLayout
@@ -203,7 +203,7 @@
                             android:layout_height="match_parent">
                         <TextView
                                 android:text="Brightness:"
-                                android:textColor="@color/colorEffectsPicText"
+                                android:textColor="@color/colorPicEffectsText"
                                 android:textSize="20sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:id="@+id/textView5"/>
@@ -211,7 +211,7 @@
                                 android:max="200"
                                 android:progress="100"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/seekBrightnessPic"/>
+                                android:layout_height="wrap_content" android:id="@+id/seekPicBrightness"/>
                     </LinearLayout>
                     <LinearLayout
                             android:orientation="vertical"
@@ -219,7 +219,7 @@
                             android:layout_height="match_parent">
                         <TextView
                                 android:text="Color HSV:"
-                                android:textColor="@color/colorEffectsPicText"
+                                android:textColor="@color/colorPicEffectsText"
                                 android:textSize="20sp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView7"/>
@@ -228,7 +228,7 @@
                                 android:max="255"
                                 android:progress="0"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/seekColorHSV"/>
+                                android:layout_height="wrap_content" android:id="@+id/seekPicColorHSV"/>
                     </LinearLayout>
                     <LinearLayout
                             android:orientation="vertical"
@@ -236,7 +236,7 @@
                             android:layout_height="match_parent">
                         <TextView
                                 android:text="Speed:"
-                                android:textColor="@color/colorEffectsPicText"
+                                android:textColor="@color/colorPicEffectsText"
                                 android:textSize="20sp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView2"/>
@@ -244,7 +244,7 @@
                                 android:max="100"
                                 android:progress="10"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/seekSpeed"/>
+                                android:layout_height="wrap_content" android:id="@+id/seekPicSpeed"/>
                     </LinearLayout>
                     <LinearLayout
                             android:orientation="horizontal"
@@ -252,7 +252,7 @@
                             android:layout_height="match_parent">
                         <TextView
                                 android:text="Effect:"
-                                android:textColor="@color/colorEffectsPicText"
+                                android:textColor="@color/colorPicEffectsText"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content" android:id="@+id/textView"
                                 android:textSize="20sp"/>
@@ -260,14 +260,13 @@
                                 android:layout_marginLeft="4dp"
                                 android:spinnerMode="dropdown"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" android:id="@+id/spinnerEffects"
+                                android:layout_height="wrap_content" android:id="@+id/spinnerPicEffects"
                                 android:entries="@array/spinner_effects"/>
                         <ImageView
                                 android:layout_marginLeft="50dp"
                                 android:layout_width="39dp"
                                 android:layout_height="39dp"
                                 app:srcCompat="@drawable/icon_search" android:id="@+id/imageEffects"/>
-
                     </LinearLayout>
                 </LinearLayout>
 
@@ -279,21 +278,21 @@
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_marginTop="15dp"
-                    android:background="@color/colorEffectsWallBack"
+                    android:background="@color/colorWallEffectsBack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 <Button
                         android:text="WALL EFFECTS"
-                        android:background="@color/colorEffectsWallBack"
-                        android:textColor="@color/colorEffectsWallText"
+                        android:background="@color/colorWallEffectsBack"
+                        android:textColor="@color/colorWallEffectsText"
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/buttEffectsWall"/>
+                        android:layout_height="wrap_content" android:id="@+id/buttWallEffects"/>
                 <LinearLayout
                         android:orientation="vertical"
                         android:id="@+id/pageEffectsWall"
-                        android:background="@color/colorEffectsWallBack"
+                        android:background="@color/colorWallEffectsBack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                     <LinearLayout
@@ -302,7 +301,7 @@
                             android:layout_height="match_parent">
                         <TextView
                                 android:text="Brightness:"
-                                android:textColor="@color/colorEffectsPicText"
+                                android:textColor="@color/colorWallEffectsText"
                                 android:textSize="20sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:id="@+id/textView15"/>
@@ -310,7 +309,7 @@
                                 android:max="200"
                                 android:progress="100"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/seekBrightnessWall"/>
+                                android:layout_height="wrap_content" android:id="@+id/seekWallBrightness"/>
                     </LinearLayout>
                     <LinearLayout
                             android:orientation="vertical"
@@ -318,7 +317,7 @@
                             android:layout_height="match_parent">
                         <TextView
                                 android:text="Color HSV:"
-                                android:textColor="@color/colorEffectsWallText"
+                                android:textColor="@color/colorWallEffectsText"
                                 android:textSize="20sp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView8"/>
@@ -327,7 +326,7 @@
                                 android:max="255"
                                 android:progress="0"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/seekColorHSVWall"/>
+                                android:layout_height="wrap_content" android:id="@+id/seekWallColorHSV"/>
                     </LinearLayout>
                     <LinearLayout
                             android:orientation="vertical"
@@ -335,7 +334,7 @@
                             android:layout_height="match_parent">
                         <TextView
                                 android:text="Speed:"
-                                android:textColor="@color/colorEffectsWallText"
+                                android:textColor="@color/colorWallEffectsText"
                                 android:textSize="20sp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView13"/>
@@ -343,7 +342,7 @@
                                 android:max="100"
                                 android:progress="10"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/seekSpeedWall"/>
+                                android:layout_height="wrap_content" android:id="@+id/seekWallSpeed"/>
                     </LinearLayout>
                     <LinearLayout
                             android:orientation="horizontal"
@@ -351,7 +350,7 @@
                             android:layout_height="match_parent">
                         <TextView
                                 android:text="Effect:"
-                                android:textColor="@color/colorEffectsWallText"
+                                android:textColor="@color/colorWallEffectsText"
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content" android:id="@+id/textView12"
                                 android:textSize="20sp"/>
@@ -359,13 +358,13 @@
                                 android:layout_marginLeft="4dp"
                                 android:spinnerMode="dropdown"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" android:id="@+id/spinnerEffectsWall"
+                                android:layout_height="wrap_content" android:id="@+id/spinnerWallEffects"
                                 android:entries="@array/spinner_effects"/>
                         <ImageView
                                 android:layout_marginLeft="50dp"
                                 android:layout_width="39dp"
                                 android:layout_height="39dp"
-                                app:srcCompat="@drawable/icon_search" android:id="@+id/imageEffectsWall"/>
+                                app:srcCompat="@drawable/icon_search" android:id="@+id/imageWallEffects"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -376,30 +375,76 @@
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_marginTop="15dp"
-                    android:background="@color/colorEffectsWallBack"
+                    android:background="@color/colorPicAutoBack"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 <Button
                         android:text="Automation"
-                        android:background="@color/colorAutoBack"
-                        android:textColor="@color/colorAutoText"
+                        android:background="@color/colorPicAutoBack"
+                        android:textColor="@color/colorPicAutoText"
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/buttAuto"/>
+                        android:layout_height="wrap_content" android:id="@+id/buttPicAuto"/>
                 <LinearLayout
                         android:orientation="vertical"
                         android:id="@+id/pageAuto"
-                        android:background="@color/colorAutoBack"
+                        android:background="@color/colorPicAutoBack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                     <ToggleButton
                             android:text="ToggleButton"
-                            android:background="@color/colorAutoToggle"
-                            android:textColor="@color/colorAutoText"
+                            android:background="@color/colorPicAutoToggle"
+                            android:textColor="@color/colorPicAutoText"
                             android:layout_marginLeft="160dp"
                             android:layout_width="60dp"
-                            android:layout_height="wrap_content" android:id="@+id/toggleAuto"/>
+                            android:layout_height="wrap_content" android:id="@+id/togglePicAuto"/>
+
+                    <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="TextView"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorPicAutoText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView17"/>
+                        <SeekBar
+                                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:max="10"
+                                android:progress="5"
+                                android:id="@+id/seekPicAutoTimer"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Effect will change through:"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorPicAutoText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView22"/>
+                        <TextView
+                                android:text=""
+                                android:textSize="20sp"
+                                android:textColor="@color/colorPicAutoTextTime"
+                                android:layout_width="25dp"
+                                android:layout_height="wrap_content" android:id="@+id/textPicAutoTime"/>
+                        <TextView
+                                android:text="min"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorPicAutoText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView24"/>
+                    </LinearLayout>
+
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
@@ -407,7 +452,7 @@
                         <TextView
                                 android:text="Place:"
                                 android:textSize="20sp"
-                                android:textColor="@color/colorAutoText"
+                                android:textColor="@color/colorPicAutoText"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:id="@+id/textView14"/>
                         <Spinner
@@ -417,7 +462,7 @@
                         <TextView
                                 android:text="Effect:"
                                 android:textSize="20sp"
-                                android:textColor="@color/colorAutoText"
+                                android:textColor="@color/colorPicAutoText"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:id="@+id/textView16"/>
                         <Spinner
@@ -431,7 +476,7 @@
                             android:layout_height="match_parent">
                         <TextView
                                 android:text="Brightness:"
-                                android:textColor="@color/colorAutoText"
+                                android:textColor="@color/colorPicAutoText"
                                 android:textSize="20sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:id="@+id/textView19"/>
@@ -439,7 +484,7 @@
                                 android:max="200"
                                 android:progress="100"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/seekBrightnessAuto"/>
+                                android:layout_height="wrap_content" android:id="@+id/seekPicAutoBrightness"/>
                     </LinearLayout>
                     <LinearLayout
                             android:orientation="vertical"
@@ -447,7 +492,7 @@
                             android:layout_height="match_parent">
                         <TextView
                                 android:text="Color HSV:"
-                                android:textColor="@color/colorAutoText"
+                                android:textColor="@color/colorPicAutoText"
                                 android:textSize="20sp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView21"/>
@@ -456,7 +501,7 @@
                                 android:max="255"
                                 android:progress="0"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/seekColorHSVAuto"/>
+                                android:layout_height="wrap_content" android:id="@+id/seekPicAutoColorHSV"/>
                     </LinearLayout>
                     <LinearLayout
                             android:orientation="vertical"
@@ -464,7 +509,7 @@
                             android:layout_height="match_parent">
                         <TextView
                                 android:text="Speed:"
-                                android:textColor="@color/colorAutoText"
+                                android:textColor="@color/colorPicAutoText"
                                 android:textSize="20sp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/textView20"/>
@@ -472,7 +517,7 @@
                                 android:max="100"
                                 android:progress="10"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" android:id="@+id/seekSpeedAuto"/>
+                                android:layout_height="wrap_content" android:id="@+id/seekPicAutoSpeed"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
