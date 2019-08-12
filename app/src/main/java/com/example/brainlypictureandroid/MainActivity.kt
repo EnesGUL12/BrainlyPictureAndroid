@@ -56,6 +56,8 @@ class MainActivity : AppCompatActivity() {
     //TODO: Check auto empty effects
     //TODO: Add EEPROM
     //TODO: Fix effects speed
+    //TODO: Test auto mode
+    //TODO: Make auto light off
 
 
     fun connect() {
@@ -90,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         val seek_wall_hsv = seekWallColorHSV
         val seek_wall_bright = seekWallBrightness
 
-        val page_pic_auto = pageAuto
+        val page_pic_auto = pagePicAuto
         val butt_pic_auto = buttPicAuto
         val spinner_pic_auto_place = spinnerPlace
         val spinner_pic_auto_effect = spinnerEffectAuto
@@ -102,6 +104,19 @@ class MainActivity : AppCompatActivity() {
         val seek_pic_auto_timer = seekPicAutoTimer
         val butt_pic_auto_start_time = buttPicAutoStartTime
         val butt_pic_auto_end_time = buttPicAutoEndTime
+
+        val page_wall_auto = pageWallAuto
+        val butt_wall_auto = buttWallAuto
+        val spinner_wall_auto_place = spinnerWallPlace
+        val spinner_wall_auto_effect = spinnerWallEffectAuto
+        val seek_wall_auto_speed =seekWallAutoSpeed
+        val seek_wall_auto_hsv = seekWallAutoColorHSV
+        val seek_wall_auto_bright = seekWallAutoBrightness
+        val toggle_wall_auto = toggleWallAuto
+        val text_wall_auto_timer = textWallAutoTimer
+        val seek_wall_auto_timer = seekWallAutoTimer
+        val butt_wall_auto_start_time = buttWallAutoStartTime
+        val butt_wall_auto_end_time = buttWallAutoEndTime
 
         val clientId = MqttClient.generateClientId()
         val client = MqttAndroidClient(
@@ -152,6 +167,7 @@ class MainActivity : AppCompatActivity() {
                         page_effects.visibility = View.GONE
                         page_wall_effects.visibility = View.GONE
                         page_pic_auto.visibility = View.GONE
+                        page_wall_auto.visibility = View.GONE
                         flag_start = true
                         publish(client, seek_brightness.progress.toString(), "picture/brightness")
                     }
@@ -514,6 +530,131 @@ class MainActivity : AppCompatActivity() {
                     }
 
 
+
+
+                    // AUTO WALL PAGE
+                    butt_wall_auto.setOnClickListener(View.OnClickListener {
+                        if(!page_wall_auto.isVisible) {
+                            page_wall_auto.visibility = View.VISIBLE
+                        }
+                        else{
+                            page_wall_auto.visibility = View.GONE
+                        }
+                    })
+
+
+                    spinner_wall_auto_place.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>,
+                            itemSelected: View, selectedItemPosition: Int, selectedId: Long) {
+
+                            publish(client, selectedItemPosition.toString(), "picture/wall/auto/place")
+                        }
+                        override fun onNothingSelected(arg0: AdapterView<*>) {
+
+                        }
+                    })
+
+                    spinner_wall_auto_effect.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>,
+                            itemSelected: View, selectedItemPosition: Int, selectedId: Long) {
+
+                            publish(client, selectedItemPosition.toString(), "picture/wall/auto/effect")
+                        }
+                        override fun onNothingSelected(arg0: AdapterView<*>) {
+
+                        }
+                    })
+
+                    seek_wall_auto_speed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/effect/speed")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
+                    seek_wall_auto_hsv.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/wall/effect/color")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
+                    seek_wall_auto_bright.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/wall/effect/brightness")
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
+                    toggle_wall_auto.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener{ _, isChecked ->
+                        if(isChecked){
+                            publish(client, "on", "picture/wall/auto")
+                            toggle_wall_auto.setBackgroundColor(Color.GREEN)
+                        }
+                        else{
+                            publish(client, "off", "picture/wall/auto")
+                            toggle_wall_auto.setBackgroundColor(Color.DKGRAY)
+                        }
+                    })
+
+
+                    seek_wall_auto_timer.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                            publish(client, progress.toString(), "picture/wall/auto/timer")
+                            text_wall_auto_timer.text = progress.toString()
+                        }
+
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                        }
+
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        }
+                    })
+
+
+                    butt_wall_auto_start_time.setOnClickListener {
+                        val cal = Calendar.getInstance()
+                        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                            cal.set(Calendar.HOUR_OF_DAY, hour)
+                            cal.set(Calendar.MINUTE, minute)
+                            butt_wall_auto_start_time.text = SimpleDateFormat("HH:mm").format(cal.time)
+                            publish(client, hour.toString(), "picture/wall/auto/start/hour")
+                            publish(client, hour.toString(), "picture/wall/auto/start/min")
+                        }
+                        TimePickerDialog(this@MainActivity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+                    }
+
+                    butt_wall_auto_end_time.setOnClickListener {
+                        val cal = Calendar.getInstance()
+                        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                            cal.set(Calendar.HOUR_OF_DAY, hour)
+                            cal.set(Calendar.MINUTE, minute)
+                            butt_wall_auto_end_time.text = SimpleDateFormat("HH:mm").format(cal.time)
+                            publish(client, hour.toString(), "picture/wall/auto/end/hour")
+                            publish(client, hour.toString(), "picture/wall/auto/end/min")
+                        }
+                        TimePickerDialog(this@MainActivity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+                    }
 
 
 

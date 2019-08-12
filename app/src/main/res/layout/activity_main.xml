@@ -388,7 +388,7 @@
                         android:layout_height="wrap_content" android:id="@+id/buttPicAuto"/>
                 <LinearLayout
                         android:orientation="vertical"
-                        android:id="@+id/pageAuto"
+                        android:id="@+id/pagePicAuto"
                         android:background="@color/colorPicAutoBack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -577,6 +577,215 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
+
+            // AUTOMATION
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/colorWallAutoBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <Button
+                        android:text="Automation"
+                        android:background="@color/colorWallAutoBack"
+                        android:textColor="@color/colorWallAutoText"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/buttWallAuto"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:id="@+id/pageWallAuto"
+                        android:background="@color/colorWallAutoBack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <ToggleButton
+                            android:text="ToggleButton"
+                            android:background="@color/colorWallAutoToggle"
+                            android:textColor="@color/colorWallAutoText"
+                            android:layout_marginLeft="160dp"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content" android:id="@+id/toggleWallAuto"/>
+
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:layout_marginLeft="70dp"
+                                android:layout_marginBottom="10dp"
+                                android:text="Time, after which effects"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorWallAutoText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textWallAutoTime"/>
+                        <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                            <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_marginLeft="60dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+                                <TextView
+                                        android:text="Turn on:"
+                                        android:textSize="20sp"
+                                        android:textColor="@color/colorWallAutoText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" android:id="@+id/textView25"/>
+                                <Button
+                                        android:text="Choose"
+                                        android:background="@color/colorWallAutoButtTime"
+                                        android:textColor="@color/colorWallAutoButtTimeText"
+                                        android:textSize="20sp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" android:id="@+id/buttWallAutoStartTime"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_marginLeft="100dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+                                <TextView
+                                        android:text="Turn off:"
+                                        android:textSize="20sp"
+                                        android:textColor="@color/colorWallAutoText"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" android:id="@+id/textView28"/>
+                                <Button
+                                        android:text="Choose"
+                                        android:background="@color/colorWallAutoButtTime"
+                                        android:textColor="@color/colorWallAutoButtTimeText"
+                                        android:textSize="20sp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" android:id="@+id/buttWallAutoEndTime"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Choose:"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorWallAutoText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView26"/>
+                        <SeekBar
+                                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                                android:layout_marginTop="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:max="10"
+                                android:progress="5"
+                                android:id="@+id/seekWallAutoTimer"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Effect will change through:"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorPicAutoText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView27"/>
+                        <TextView
+                                android:text=""
+                                android:textSize="20sp"
+                                android:textColor="@color/colorWallAutoTextTime"
+                                android:layout_width="25dp"
+                                android:layout_height="wrap_content" android:id="@+id/textWallAutoTimer"/>
+                        <TextView
+                                android:text="min"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorWallAutoText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView29"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Place:"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorWallAutoText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView30"/>
+                        <Spinner
+                                android:entries="@array/spinner_place"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content" android:id="@+id/spinnerWallPlace"/>
+                        <TextView
+                                android:text="Effect:"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorWallAutoText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView31"/>
+                        <Spinner
+                                android:entries="@array/spinner_effects"
+                                android:layout_width="170dp"
+                                android:layout_height="wrap_content" android:id="@+id/spinnerWallEffectAuto"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Brightness:"
+                                android:textColor="@color/colorWallAutoText"
+                                android:textSize="20sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:id="@+id/textView32"/>
+                        <SeekBar
+                                android:max="200"
+                                android:progress="200"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/seekWallAutoBrightness"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Color HSV:"
+                                android:textColor="@color/colorWallAutoText"
+                                android:textSize="20sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/textView33"/>
+                        <SeekBar
+                                android:background="@drawable/hsv_line"
+                                android:max="255"
+                                android:progress="0"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/seekWallAutoColorHSV"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                                android:text="Speed:"
+                                android:textColor="@color/colorWallAutoText"
+                                android:textSize="20sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/textView34"/>
+                        <SeekBar
+                                android:max="100"
+                                android:progress="10"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/seekWallAutoSpeed"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
 
 
         </LinearLayout>

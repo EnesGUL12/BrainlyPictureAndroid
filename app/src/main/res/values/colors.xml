@@ -34,4 +34,12 @@
     <color name="colorPicAutoButtTime">#00BCD4</color>
     <color name="colorPicAutoButtTimeText">#FFEB3B</color>
 
+    // AUTO WALL PAGE
+    <color name="colorWallAutoBack">#0D47A1</color>
+    <color name="colorWallAutoText">#FF5722</color>
+    <color name="colorWallAutoToggle">#858585</color>
+    <color name="colorWallAutoTextTime">#FFEB3B</color>
+    <color name="colorWallAutoButtTime">#FFEB3B</color>
+    <color name="colorWallAutoButtTimeText">#FF5722</color>
+
 </resources>
