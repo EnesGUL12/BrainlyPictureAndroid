@@ -55,9 +55,8 @@ class MainActivity : AppCompatActivity() {
     //TODO: Check auto minutes
     //TODO: Check auto empty effects
     //TODO: Add EEPROM
-    //TODO: Fix effects speed
-    //TODO: Test auto mode
-    //TODO: Make auto light off
+    //TODO: Add test auto mode
+    //TODO: Add save button
 
 
     fun connect() {
@@ -68,6 +67,8 @@ class MainActivity : AppCompatActivity() {
         val page_settings = pageSettings
         val text_connect = textConnect
         val seek_brightness = seekBrightness
+        val toggle_auto = toggleAuto
+        val butt_save = buttPicAutoSave
 
         val butt_one_color = buttOneColor
         val page_one_color = pageOneColor
@@ -104,6 +105,7 @@ class MainActivity : AppCompatActivity() {
         val seek_pic_auto_timer = seekPicAutoTimer
         val butt_pic_auto_start_time = buttPicAutoStartTime
         val butt_pic_auto_end_time = buttPicAutoEndTime
+
 
         val page_wall_auto = pageWallAuto
         val butt_wall_auto = buttWallAuto
@@ -179,12 +181,23 @@ class MainActivity : AppCompatActivity() {
                         if(!page_settings.isVisible) {
                             page_settings.visibility = View.VISIBLE
                             publish(client, "info", "picture/connect")
-                            publish(client, "info", "picture/info")
                             publish(client, seek_brightness.progress.toString(), "picture/brightness")
-
                         }
                         else{
                             page_settings.visibility = View.GONE
+                        }
+                    })
+
+                    toggle_auto.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener{ _, isChecked ->
+                        if(isChecked){
+                            publish(client, "on", "picture/auto")
+                            toggle_auto.setBackgroundColor(Color.GREEN)
+                            toggle_auto.text = "ON"
+                        }
+                        else{
+                            publish(client, "off", "picture/auto")
+                            toggle_auto.setBackgroundColor(Color.RED)
+                            toggle_auto.text = "OFF"
                         }
                     })
 
@@ -198,6 +211,11 @@ class MainActivity : AppCompatActivity() {
 
                         override fun onStopTrackingTouch(seekBar: SeekBar?) {
                         }
+                    })
+
+                    butt_save.setOnClickListener(View.OnClickListener {
+                        publish(client, "save", "picture/save")
+                        butt_save.setBackgroundColor(Color.GREEN)
                     })
 
 
@@ -302,6 +320,7 @@ class MainActivity : AppCompatActivity() {
                     seek_speed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                             publish(client, progress.toString(), "picture/effect/speed")
+                            seek_wall_auto_speed.progress = progress
                         }
 
                         override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -368,6 +387,7 @@ class MainActivity : AppCompatActivity() {
                     seek_wall_speed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                             publish(client, progress.toString(), "picture/effect/speed")
+                            seek_pic_auto_speed.progress = progress
                         }
 
                         override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -405,7 +425,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-                    // AUTO PAGE
+                    // AUTO PIC PAGE
                     butt_pic_auto.setOnClickListener(View.OnClickListener {
                         if(!page_pic_auto.isVisible) {
                             page_pic_auto.visibility = View.VISIBLE
@@ -483,10 +503,12 @@ class MainActivity : AppCompatActivity() {
                         if(isChecked){
                             publish(client, "on", "picture/pic/auto")
                             toggle_pic_auto.setBackgroundColor(Color.GREEN)
+                            toggle_pic_auto.text = "ON"
                         }
                         else{
                             publish(client, "off", "picture/pic/auto")
-                            toggle_pic_auto.setBackgroundColor(Color.DKGRAY)
+                            toggle_pic_auto.setBackgroundColor(Color.RED)
+                            toggle_pic_auto.text = "OFF"
                         }
                     })
 
@@ -511,8 +533,9 @@ class MainActivity : AppCompatActivity() {
                             cal.set(Calendar.HOUR_OF_DAY, hour)
                             cal.set(Calendar.MINUTE, minute)
                             butt_pic_auto_start_time.text = SimpleDateFormat("HH:mm").format(cal.time)
-                            publish(client, hour.toString(), "picture/pic/auto/start/hour")
-                            publish(client, hour.toString(), "picture/pic/auto/start/min")
+                            butt_wall_auto_start_time.text = SimpleDateFormat("HH:mm").format(cal.time)
+                            publish(client, hour.toString(), "picture/auto/start/hour")
+                            publish(client, hour.toString(), "picture/auto/start/min")
                         }
                         TimePickerDialog(this@MainActivity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
                     }
@@ -523,11 +546,15 @@ class MainActivity : AppCompatActivity() {
                             cal.set(Calendar.HOUR_OF_DAY, hour)
                             cal.set(Calendar.MINUTE, minute)
                             butt_pic_auto_end_time.text = SimpleDateFormat("HH:mm").format(cal.time)
-                            publish(client, hour.toString(), "picture/pic/auto/end/hour")
-                            publish(client, hour.toString(), "picture/pic/auto/end/min")
+                            butt_wall_auto_end_time.text = SimpleDateFormat("HH:mm").format(cal.time)
+                            publish(client, hour.toString(), "picture/auto/end/hour")
+                            publish(client, hour.toString(), "picture/auto/end/min")
                         }
                         TimePickerDialog(this@MainActivity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
                     }
+
+
+
 
 
 
@@ -610,10 +637,12 @@ class MainActivity : AppCompatActivity() {
                         if(isChecked){
                             publish(client, "on", "picture/wall/auto")
                             toggle_wall_auto.setBackgroundColor(Color.GREEN)
+                            toggle_wall_auto.text = "ON"
                         }
                         else{
                             publish(client, "off", "picture/wall/auto")
-                            toggle_wall_auto.setBackgroundColor(Color.DKGRAY)
+                            toggle_wall_auto.setBackgroundColor(Color.RED)
+                            toggle_wall_auto.text = "OFF"
                         }
                     })
 
@@ -638,8 +667,9 @@ class MainActivity : AppCompatActivity() {
                             cal.set(Calendar.HOUR_OF_DAY, hour)
                             cal.set(Calendar.MINUTE, minute)
                             butt_wall_auto_start_time.text = SimpleDateFormat("HH:mm").format(cal.time)
-                            publish(client, hour.toString(), "picture/wall/auto/start/hour")
-                            publish(client, hour.toString(), "picture/wall/auto/start/min")
+                            butt_pic_auto_start_time.text = SimpleDateFormat("HH:mm").format(cal.time)
+                            publish(client, hour.toString(), "picture/auto/start/hour")
+                            publish(client, hour.toString(), "picture/auto/start/min")
                         }
                         TimePickerDialog(this@MainActivity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
                     }
@@ -650,13 +680,13 @@ class MainActivity : AppCompatActivity() {
                             cal.set(Calendar.HOUR_OF_DAY, hour)
                             cal.set(Calendar.MINUTE, minute)
                             butt_wall_auto_end_time.text = SimpleDateFormat("HH:mm").format(cal.time)
-                            publish(client, hour.toString(), "picture/wall/auto/end/hour")
-                            publish(client, hour.toString(), "picture/wall/auto/end/min")
+                            butt_pic_auto_end_time.text = SimpleDateFormat("HH:mm").format(cal.time)
+                            publish(client, hour.toString(), "picture/auto/end/hour")
+                            publish(client, hour.toString(), "picture/auto/end/min")
                         }
                         TimePickerDialog(this@MainActivity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
                     }
-
-
+                    
 
 
 

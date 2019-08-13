@@ -13,6 +13,7 @@
     <color name="colorSettConnON">#4CAF50</color>
     <color name="colorSettConnOFF">#E53935</color>
     <color name="colorSettText">#FFFFFF</color>
+    <color name="colorAutoToggle">#8B8B8B</color>
 
     // ONE COLOR PAGE
     <color name="colorOneColorBack">#FFEB3B</color>
@@ -27,17 +28,17 @@
     <color name="colorWallEffectsText">#9C27B0</color>
 
     // AUTO PAGE
+    <color name="colorPicAutoToggle">#8B8B8B</color>
     <color name="colorPicAutoBack">#FF9800</color>
     <color name="colorPicAutoText">#4CAF50</color>
-    <color name="colorPicAutoToggle">#858585</color>
     <color name="colorPicAutoTextTime">#00BCD4</color>
     <color name="colorPicAutoButtTime">#00BCD4</color>
     <color name="colorPicAutoButtTimeText">#FFEB3B</color>
 
     // AUTO WALL PAGE
+    <color name="colorWallAutoToggle">#8B8B8B</color>
     <color name="colorWallAutoBack">#0D47A1</color>
     <color name="colorWallAutoText">#FF5722</color>
-    <color name="colorWallAutoToggle">#858585</color>
     <color name="colorWallAutoTextTime">#FFEB3B</color>
     <color name="colorWallAutoButtTime">#FFEB3B</color>
     <color name="colorWallAutoButtTimeText">#FF5722</color>
