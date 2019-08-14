@@ -235,8 +235,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:id="@+id/textView5"/>
                         <SeekBar
-                                android:max="200"
-                                android:progress="200"
+                                android:max="255"
+                                android:progress="255"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/seekPicBrightness"/>
                     </LinearLayout>
@@ -333,8 +333,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:id="@+id/textView15"/>
                         <SeekBar
-                                android:max="200"
-                                android:progress="200"
+                                android:max="255"
+                                android:progress="255"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/seekWallBrightness"/>
                     </LinearLayout>
@@ -564,8 +564,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:id="@+id/textView19"/>
                         <SeekBar
-                                android:max="200"
-                                android:progress="200"
+                                android:max="255"
+                                android:progress="255"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/seekPicAutoBrightness"/>
                     </LinearLayout>
@@ -772,8 +772,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:id="@+id/textView32"/>
                         <SeekBar
-                                android:max="200"
-                                android:progress="200"
+                                android:max="255"
+                                android:progress="255"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/seekWallAutoBrightness"/>
                     </LinearLayout>

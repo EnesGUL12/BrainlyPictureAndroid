@@ -14,6 +14,7 @@ import org.eclipse.paho.client.mqttv3.*
 import java.io.UnsupportedEncodingException
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 import android.app.TimePickerDialog
+import android.content.Context
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,6 +34,11 @@ var effects_image = arrayOf(
     R.drawable.icon_march,
     R.drawable.icon_march2
     )
+var time_sleep:Long = 100
+var pic_auto_place = 0
+var pic_auto_effect = arrayOf(0,0,0,0,0,0,0,0,0,0,0,0)
+var wall_auto_place = 0
+var wall_auto_effect = arrayOf(0,0,0,0,0,0,0,0,0,0,0,0)
 
 
 
@@ -53,10 +59,8 @@ class MainActivity : AppCompatActivity() {
     //TODO: Add warning
     //TODO: Make auto initial all empty labels
     //TODO: Check auto minutes
-    //TODO: Check auto empty effects
-    //TODO: Add EEPROM
     //TODO: Add test auto mode
-    //TODO: Add save button
+    //TODO: Add memory clear button
 
 
     fun connect() {
@@ -68,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         val text_connect = textConnect
         val seek_brightness = seekBrightness
         val toggle_auto = toggleAuto
-        val butt_save = buttPicAutoSave
+        val butt_save = buttSave
 
         val butt_one_color = buttOneColor
         val page_one_color = pageOneColor
@@ -120,6 +124,9 @@ class MainActivity : AppCompatActivity() {
         val butt_wall_auto_start_time = buttWallAutoStartTime
         val butt_wall_auto_end_time = buttWallAutoEndTime
 
+        val Memory = getSharedPreferences("main_memory", Context.MODE_PRIVATE)
+        val saver = Memory.edit();
+
         val clientId = MqttClient.generateClientId()
         val client = MqttAndroidClient(
             this.applicationContext, "tcp://192.168.1.112:1883",
@@ -163,7 +170,27 @@ class MainActivity : AppCompatActivity() {
                     //publish(client, "update", "water/info")
 
                     if(!flag_start){
-                        publish(client, "info", "picture/connect")
+                        seek_brightness.progress = Memory.getInt("brightness",0)
+                        toggle_auto.isChecked = Memory.getBoolean("bool_auto", false)
+
+                        seek_bright.progress = Memory.getInt("pic_bright",0)
+                        seek_speed.progress = Memory.getInt("pic_speed",0)
+                        seek_hsv.progress = Memory.getInt("pic_hsv",0)
+
+                        seek_wall_bright.progress = Memory.getInt("wall_bright",0)
+                        seek_wall_speed.progress = Memory.getInt("wall_speed",0)
+                        seek_wall_hsv.progress = Memory.getInt("wall_hsv",0)
+
+                        toggle_pic_auto.isChecked = Memory.getBoolean("bool_pic_auto", false)
+                        seek_bright.progress = Memory.getInt("pic_bright",0)
+                        seek_speed.progress = Memory.getInt("pic_speed",0)
+                        seek_hsv.progress = Memory.getInt("pic_hsv",0)
+
+                        toggle_wall_auto.isChecked = Memory.getBoolean("bool_wall_auto", false)
+                        seek_wall_auto_bright.progress = Memory.getInt("wall_bright",0)
+                        seek_wall_hsv.progress = Memory.getInt("wall_hsv",0)
+                        seek_wall_auto_speed.progress = Memory.getInt("wall_speed",0)
+
                         page_settings.visibility = View.GONE
                         page_one_color.visibility = View.GONE
                         page_effects.visibility = View.GONE
@@ -171,7 +198,6 @@ class MainActivity : AppCompatActivity() {
                         page_pic_auto.visibility = View.GONE
                         page_wall_auto.visibility = View.GONE
                         flag_start = true
-                        publish(client, seek_brightness.progress.toString(), "picture/brightness")
                     }
 
 
@@ -181,7 +207,19 @@ class MainActivity : AppCompatActivity() {
                         if(!page_settings.isVisible) {
                             page_settings.visibility = View.VISIBLE
                             publish(client, "info", "picture/connect")
+                            Thread.sleep(time_sleep)
                             publish(client, seek_brightness.progress.toString(), "picture/brightness")
+                            Thread.sleep(time_sleep)
+                            if(toggle_auto.isChecked){
+                                publish(client, "on", "picture/auto")
+                                toggle_auto.setBackgroundColor(Color.GREEN)
+                                toggle_auto.text = "ON"
+                            }
+                            else{
+                                publish(client, "off", "picture/auto")
+                                toggle_auto.setBackgroundColor(Color.RED)
+                                toggle_auto.text = "OFF"
+                            }
                         }
                         else{
                             page_settings.visibility = View.GONE
@@ -216,6 +254,27 @@ class MainActivity : AppCompatActivity() {
                     butt_save.setOnClickListener(View.OnClickListener {
                         publish(client, "save", "picture/save")
                         butt_save.setBackgroundColor(Color.GREEN)
+                        saver.putInt("brightness", seek_brightness.progress)
+                        saver.putBoolean("bool_auto", toggle_auto.isChecked)
+
+                        saver.putInt("pic_bright", seek_bright.progress)
+                        saver.putInt("pic_speed", seek_speed.progress)
+                        saver.putInt("pic_hsv", seek_hsv.progress)
+
+                        saver.putInt("wall_bright", seek_wall_bright.progress)
+                        saver.putInt("wall_speed", seek_wall_speed.progress)
+                        saver.putInt("wall_hsv", seek_wall_hsv.progress)
+
+                        saver.putBoolean("bool_pic_auto", toggle_pic_auto.isChecked)
+                        saver.putInt("pic_bright", seek_pic_auto_bright.progress)
+                        saver.putInt("pic_hsv", seek_pic_auto_hsv.progress)
+                        saver.putInt("pic_speed", seek_pic_auto_speed.progress)
+
+                        saver.putBoolean("bool_wall_auto", toggle_wall_auto.isChecked)
+                        saver.putInt("wall_bright", seek_wall_auto_bright.progress)
+                        saver.putInt("wall_hsv", seek_wall_auto_hsv.progress)
+                        saver.putInt("wall_speed", seek_wall_auto_speed.progress)
+                        saver.apply()
                     })
 
 
@@ -295,6 +354,11 @@ class MainActivity : AppCompatActivity() {
                     butt_effects.setOnClickListener(View.OnClickListener {
                         if(!page_effects.isVisible) {
                             page_effects.visibility = View.VISIBLE
+                            publish(client, seek_bright.progress.toString(), "picture/pic/effect/brightness")
+                            Thread.sleep(time_sleep)
+                            publish(client, seek_hsv.progress.toString(), "picture/pic/effect/color")
+                            Thread.sleep(time_sleep)
+                            publish(client, seek_speed.progress.toString(), "picture/pic/effect/speed")
                         }
                         else{
                             page_effects.visibility = View.GONE
@@ -362,6 +426,11 @@ class MainActivity : AppCompatActivity() {
                     butt_wall_effects.setOnClickListener(View.OnClickListener {
                         if(!page_wall_effects.isVisible) {
                             page_wall_effects.visibility = View.VISIBLE
+                            publish(client, seek_wall_bright.progress.toString(), "picture/wall/effect/brightness")
+                            Thread.sleep(time_sleep)
+                            publish(client, seek_wall_hsv.progress.toString(), "picture/wall/effect/color")
+                            Thread.sleep(time_sleep)
+                            publish(client, seek_wall_speed.progress.toString(), "picture/effect/speed")
                         }
                         else{
                             page_wall_effects.visibility = View.GONE
@@ -440,7 +509,6 @@ class MainActivity : AppCompatActivity() {
                         override fun onItemSelected(
                             parent: AdapterView<*>,
                             itemSelected: View, selectedItemPosition: Int, selectedId: Long) {
-
                             publish(client, selectedItemPosition.toString(), "picture/pic/auto/place")
                         }
                         override fun onNothingSelected(arg0: AdapterView<*>) {
@@ -452,7 +520,6 @@ class MainActivity : AppCompatActivity() {
                         override fun onItemSelected(
                             parent: AdapterView<*>,
                             itemSelected: View, selectedItemPosition: Int, selectedId: Long) {
-
                             publish(client, selectedItemPosition.toString(), "picture/pic/auto/effect")
                         }
                         override fun onNothingSelected(arg0: AdapterView<*>) {
@@ -686,7 +753,7 @@ class MainActivity : AppCompatActivity() {
                         }
                         TimePickerDialog(this@MainActivity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
                     }
-                    
+
 
 
 
